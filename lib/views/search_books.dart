@@ -6,7 +6,8 @@ import 'package:grimorio_arquitetura_mvc/theme.dart';
 
 
 class SearchBooks extends StatefulWidget {
-  const SearchBooks({super.key});
+   const SearchBooks({super.key, required});
+
 
   @override
   State<SearchBooks> createState() => _SearchBooksState();
@@ -59,7 +60,7 @@ class _SearchBooksState extends State<SearchBooks> {
 }
 
 class _BooksList extends StatelessWidget {
-  const _BooksList({super.key, required this.future});
+  const _BooksList({super.key, required this.future, });
 
   // Need to change list type
   final Future<List<dynamic>>? future;

@@ -172,7 +172,7 @@ class _EmptyHome extends StatelessWidget {
       ),
       FloatingButton(onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const SearchBooks()));
+            MaterialPageRoute(builder: (context) =>  SearchBooks()));
       }),
     ]);
   }

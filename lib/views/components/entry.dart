@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:grimorio_arquitetura_mvc/models/google_book_model.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
 
 class Entry extends StatelessWidget {
-  const Entry({super.key,});
+   Entry({super.key, required this.googleBook});
 
+
+  GoogleBook googleBook;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class Entry extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: Image.network(
-              "Image Link",
+              googleBook.thumbnailLink,
               height: 126,
               width: 86,
               fit: BoxFit.cover,
@@ -25,9 +28,9 @@ class Entry extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
-                  child: Text("Book Title", style: EntryDecorationProperties.displayText,),
+                  child: Text(googleBook.title, style: EntryDecorationProperties.displayText,),
                 ),
-                Text("Book Authors", style: EntryDecorationProperties.authorText,),
+                Text(googleBook.authors, style: EntryDecorationProperties.authorText,),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grimorio_arquitetura_mvc/models/google_book_model.dart';
 import 'package:grimorio_arquitetura_mvc/views/components/primary_button.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
 import 'components/date_input.dart';
@@ -7,7 +8,9 @@ import 'components/display_text.dart';
 import 'home.dart';
 
 class NewEntry extends StatefulWidget {
-  const NewEntry({super.key,});
+   NewEntry({super.key, required this.googleBook});
+
+  GoogleBook googleBook;
 
   @override
   State<NewEntry> createState() => _NewEntryState();
@@ -43,7 +46,7 @@ class _NewEntryState extends State<NewEntry> {
                       // Entry(book: "Book"),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 24.0),
-                        child: Text("Book Description"),
+                        child: Text(widget.googleBook.description),
                       ),
                       Form(
                         key: _formKey,
