@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:grimorio_arquitetura_mvc/models/google_book_model.dart';
 import 'package:grimorio_arquitetura_mvc/views/components/display_text.dart';
 import 'package:grimorio_arquitetura_mvc/service/google_book_service.dart';
+import 'package:grimorio_arquitetura_mvc/views/components/entry.dart';
 import 'package:grimorio_arquitetura_mvc/views/components/primary_button.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
+import 'package:grimorio_arquitetura_mvc/views/new_entry.dart';
 
 
 class SearchBooks extends StatefulWidget {
@@ -16,7 +19,7 @@ class SearchBooks extends StatefulWidget {
 class _SearchBooksState extends State<SearchBooks> {
   final GoogleBooksService googleBooksService = GoogleBooksService();
   // Need to change list type
-  Future<List<dynamic>>? booksList;
+  Future<List<GoogleBook>>? booksList;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +44,9 @@ class _SearchBooksState extends State<SearchBooks> {
                   child: TextFormField(
                     onChanged: (value){
                       // Populate list of books from API
-                      // setState(() {
-                      //   booksList = googleBooksService.searchBooks(value);
-                      // });
+                      setState(() {
+                         booksList = googleBooksService.searchBooks(value);
+                      });
                     },
                     decoration: InputDecorationProperties.newInputDecoration("Procure por título/autor(a)", "Busca", const Icon(Icons.search)),
                   ),
@@ -59,11 +62,14 @@ class _SearchBooksState extends State<SearchBooks> {
   }
 }
 
+
+//criar a lista 
 class _BooksList extends StatelessWidget {
   const _BooksList({super.key, required this.future, });
 
   // Need to change list type
-  final Future<List<dynamic>>? future;
+  final Future<List<GoogleBook>>? future;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -112,9 +118,9 @@ class _BooksList extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                const Padding(
+                                Padding(
                                   padding: EdgeInsets.only(bottom: 24.0),
-                                  child: DisplayText("Detalhes do Livro"),
+                                  child: DisplayText(snapshot.data![index].description),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 16.0),
@@ -147,14 +153,14 @@ class _BooksList extends StatelessWidget {
                                   ),
                                 ),
                                 PrimaryButton(text: "Adicionar livro", onTap: () {
-                                      // Need a googleBook instance
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) => NewEntry(
-                                      //               googleBook:
-                                      //                   snapshot.data![index],
-                                      //             )));
+                                      //Need a googleBook instance
+                                      Navigator.push(
+                                           context,
+                                           MaterialPageRoute(
+                                               builder: (context) => NewEntry(
+                                                     googleBook:
+                                                         snapshot.data![index],
+                                                   )));
                                 })
                               ],
                             ),
@@ -163,7 +169,7 @@ class _BooksList extends StatelessWidget {
                       ),
                     );
                   },
-                  // child: Entry(book: snapshot.data![index]),
+                child: Entry(googleBook: snapshot.data![index]),
                 ),
                 itemCount: snapshot.data!.length,
               );
