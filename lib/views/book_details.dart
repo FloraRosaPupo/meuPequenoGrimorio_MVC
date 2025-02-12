@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grimorio_arquitetura_mvc/controller/book_controller.dart';
 import 'package:grimorio_arquitetura_mvc/models/google_book_model.dart';
 import 'package:grimorio_arquitetura_mvc/models/personal_book_model.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
@@ -8,16 +9,17 @@ import 'components/primary_button.dart';
 import 'components/secondary_button.dart';
 
 class BookDetails extends StatefulWidget {
-  BookDetails({super.key, required this.personalBook, required this.googleBook});
+  BookDetails({super.key, required this.personalBook});
 
   PersonalBook personalBook;
-  GoogleBook googleBook;
 
   @override
   State<BookDetails> createState() => _BookDetailsState();
 }
 
 class _BookDetailsState extends State<BookDetails> {
+
+  final BookController controller = BookController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +36,12 @@ class _BookDetailsState extends State<BookDetails> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 24.0),
-                    child: DisplayText(widget.googleBook.description),
+                    child: DisplayText(widget.personalBook.googleBook.description),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Image.network(
-                      widget.googleBook.thumbnailLink,
+                      widget.personalBook.googleBook.thumbnailLink,
                       height: 220,
                       width: 144,
                       fit: BoxFit.cover,
@@ -48,7 +50,7 @@ class _BookDetailsState extends State<BookDetails> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(
-                      widget.googleBook.title,
+                      widget.personalBook.googleBook.title,
                       style: ModalDecorationProperties.bookTitle,
                     ),
                   ),
@@ -57,7 +59,7 @@ class _BookDetailsState extends State<BookDetails> {
                     child: SizedBox(
                       width: double.maxFinite,
                       child: Text(
-                        widget.googleBook.authors,
+                        widget.personalBook.googleBook.authors,
                         style: ModalDecorationProperties.bookAuthor,
                       ),
                     ),
@@ -68,7 +70,7 @@ class _BookDetailsState extends State<BookDetails> {
                       children: [
                         Expanded(
                           child: Text(
-                            widget.googleBook.description,
+                            widget.personalBook.googleBook.description,
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -157,18 +159,18 @@ class _BookDetailsState extends State<BookDetails> {
                       icon: Icons.edit,
                       text: "Editar",
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => EditDetails(
-                        //               book: "book",
-                        //             ))).then((value) {
-                        //   setState(() {
-                        //     if (value != null) {
-                        //       "Update book";
-                        //     }
-                        //   });
-                        // });
+                         Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                                 builder: (context) => EditDetails(
+                                       persona: widget.personalBook,
+                                     ))).then((value) {
+                           setState(() {
+                             if (value != null) {
+                               widget.personalBook = value;
+                             }
+                           });
+                         });
                       },
                     ),
                   ),
@@ -178,12 +180,12 @@ class _BookDetailsState extends State<BookDetails> {
                       icon: Icons.delete,
                       text: "Excluir",
                       onTap: () {
-                        // Delete book
-                        // Navigator.pushAndRemoveUntil(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => const Home()),
-                        //   (_) => false,
-                        // );
+                        controller.deleteBook(widget.personalBook);
+                         Navigator.pushAndRemoveUntil(
+                           context,
+                           MaterialPageRoute(builder: (context) => const Home()),
+                           (_) => false,
+                         );
                       },
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grimorio_arquitetura_mvc/controller/book_controller.dart';
 import 'package:grimorio_arquitetura_mvc/models/personal_book_model.dart';
 import 'package:grimorio_arquitetura_mvc/views/components/date_input.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
@@ -21,6 +22,8 @@ class _EditDetailsState extends State<EditDetails> {
   final TextEditingController initialDateController = TextEditingController();
   final TextEditingController finalDateController = TextEditingController();
   final TextEditingController commentsController = TextEditingController();
+
+  final BookController controller = BookController();
 
   @override
   void initState() {
@@ -84,7 +87,16 @@ class _EditDetailsState extends State<EditDetails> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 40.0),
                               child: PrimaryButton(text: "Salvar", onTap: () {
-                                // Navigator.pop(context, "Updated book");
+                                //criar um novo PersonalBook
+                                final PersonalBook newPersonal = PersonalBook(
+                                  dayStarted: initialDateController.text,
+                                  dayFinished: finalDateController.text,
+                                  comments: commentsController.text,
+                                  googleBook: widget.personalBook.googleBook, id: widget.personalBook.id
+                                );
+                                controller.updateBook(newPersonal);
+
+                                Navigator.pop(context, newPersonal);
                               }),
                             ),
                           ],
