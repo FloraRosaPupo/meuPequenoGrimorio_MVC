@@ -1,3 +1,5 @@
+import 'edit_details.dart';
+import 'home.dart';
 import 'package:flutter/material.dart';
 import 'package:grimorio_arquitetura_mvc/controller/book_controller.dart';
 import 'package:grimorio_arquitetura_mvc/models/google_book_model.dart';
@@ -163,7 +165,7 @@ class _BookDetailsState extends State<BookDetails> {
                              context,
                              MaterialPageRoute(
                                  builder: (context) => EditDetails(
-                                       persona: widget.personalBook,
+                                       personalBook: widget.personalBook,
                                      ))).then((value) {
                            setState(() {
                              if (value != null) {

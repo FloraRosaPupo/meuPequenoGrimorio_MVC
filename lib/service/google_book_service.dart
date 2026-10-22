@@ -1,30 +1,18 @@
-
-// ignore: depend_on_referenced_packages
+import 'dart:convert';
 import 'package:grimorio_arquitetura_mvc/models/google_book_model.dart';
-// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 
 class GoogleBooksService {
-  static const String baseUrl = "https://www.googleapis.com/books/v1/volumes";
-  
-  get json => null;
+  final http.Client? client;
+  GoogleBooksService({this.client});
 
   Future<List<GoogleBook>> searchBooks(String name) async {
-    if(name != "") {
-      http.Response httpResponse = await http.get(Uri.parse("$baseUrl/?q=$name"));
-
-      Map<String, dynamic> response = json.decode(httpResponse.body);
-      List listResponse = response["items"];
-
-      List<GoogleBook> listResult = [];
-      for (int i = 0; i < listResponse.length; i++) {
-        listResult.add(GoogleBook.fromApi(listResponse[i]));
-      }
-
-      return listResult;
-    }
-    return List.empty();
+    if(name.trim().isEmpty) return [];
+    final uri=Uri.https('www.googleapis.com','/books/v1/volumes',{'q':name.trim()});
+    final response=await (client?.get ?? http.get)(uri);
+    if(response.statusCode!=200) throw StateError('Falha na busca de livros.');
+    final data=jsonDecode(response.body) as Map<String,dynamic>;
+    final items=data['items'] as List<dynamic>? ?? [];
+    return items.map((item)=>GoogleBook.fromApi(item as Map<String,dynamic>)).toList();
   }
 }
-
-
