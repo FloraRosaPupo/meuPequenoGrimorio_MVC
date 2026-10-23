@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:grimorio_arquitetura_mvc/views/login.dart';
-import 'package:grimorio_arquitetura_mvc/views/components/primary_button.dart';
+import 'package:grimorio_arquitetura_mvc/features/auth/presentation/login.dart';
+import 'package:grimorio_arquitetura_mvc/shared/widgets/primary_button.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
 
 class Dashboard extends StatelessWidget {
@@ -9,7 +9,8 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Container(
+    return SafeArea(
+        child: Container(
       decoration: AppBackgroundProperties.boxDecoration,
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -26,9 +27,16 @@ class Dashboard extends StatelessWidget {
                     SvgPicture.asset("assets/images/logo.svg"),
                     Padding(
                       padding: const EdgeInsets.only(top: 104.0),
-                      child: PrimaryButton(text: "Entrar", onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Login(),));
-                      },),
+                      child: PrimaryButton(
+                        text: "Entrar",
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Login(),
+                              ));
+                        },
+                      ),
                     ),
                   ],
                 )

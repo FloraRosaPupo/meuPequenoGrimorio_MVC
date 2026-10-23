@@ -1,4 +1,4 @@
-import 'package:grimorio_arquitetura_mvc/models/personal_book_model.dart';
+import 'package:grimorio_arquitetura_mvc/features/library/domain/personal_book_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -9,7 +9,7 @@ class PersonalBookDatabase {
   static const String _dayFinished = "dayFinished";
   static const String _comments = "comments";
   static const String _googleBook = "googleBook";
- 
+
   static const String createTableSQL =
       // ignore: prefer_adjacent_string_concatenation, prefer_interpolation_to_compose_strings
       "CREATE TABLE $_tableName($_id INTEGER NOT NULL PRIMARY KEY," +
@@ -106,4 +106,3 @@ class PersonalBookDatabase {
 }
 
 class PersonalBookNotFindException implements Exception {}
-

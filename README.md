@@ -3,7 +3,9 @@
 Consulta de livros e registro pessoal de leituras.
 
 ## Stack e organização
-Flutter/Dart, SQLite, flutter_svg e Google Books. A organização MVC separa `models/`, `controller/` e `views/`; `dao/` cuida da persistência. SQLite precisa de uma plataforma compatível.
+Flutter/Dart, http, SQLite e componentes de interface.
+
+Biblioteca reúne models, serviço, DAO, controller e telas em `features/library`; autenticação fica em `features/auth` e widgets reutilizados em shared. Mantido MVC existente: controller coordena a apresentação, serviço consulta API e DAO persiste dados. Não foi duplicado com MVVM.
 
 ## Executar
 Use a versão de Flutter registrada em `.github/workflows/ci.yml`.
@@ -26,3 +28,17 @@ Abra uma branch por alteração, descreva o comportamento esperado e inclua test
 
 ## Licença
 Não há licença de distribuição definida neste repositório.
+
+
+## Funcionalidades
+
+- Busca de livros.
+- biblioteca pessoal.
+- criação e edição de registros.
+
+
+## Organização e manutenção
+
+Biblioteca reúne models, serviço, DAO, controller e telas em `features/library`; autenticação fica em `features/auth` e widgets reutilizados em shared. Mantido MVC existente: controller coordena a apresentação, serviço consulta API e DAO persiste dados. Não foi duplicado com MVVM.
+
+Veja [a revisão de desenvolvimento](docs/REVISAO.md) para decisões, testes e limites, e [o guia de contribuição](CONTRIBUTING.md) para o fluxo de manutenção.

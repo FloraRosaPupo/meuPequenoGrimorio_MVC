@@ -1,14 +1,14 @@
 import 'edit_details.dart';
 import 'home.dart';
 import 'package:flutter/material.dart';
-import 'package:grimorio_arquitetura_mvc/controller/book_controller.dart';
-import 'package:grimorio_arquitetura_mvc/models/google_book_model.dart';
-import 'package:grimorio_arquitetura_mvc/models/personal_book_model.dart';
+import 'package:grimorio_arquitetura_mvc/features/library/presentation/controllers/book_controller.dart';
+import 'package:grimorio_arquitetura_mvc/features/library/domain/google_book_model.dart';
+import 'package:grimorio_arquitetura_mvc/features/library/domain/personal_book_model.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
 
-import 'components/display_text.dart';
-import 'components/primary_button.dart';
-import 'components/secondary_button.dart';
+import '../../../shared/widgets/display_text.dart';
+import '../../../shared/widgets/primary_button.dart';
+import '../../../shared/widgets/secondary_button.dart';
 
 class BookDetails extends StatefulWidget {
   BookDetails({super.key, required this.personalBook});
@@ -20,7 +20,6 @@ class BookDetails extends StatefulWidget {
 }
 
 class _BookDetailsState extends State<BookDetails> {
-
   final BookController controller = BookController();
 
   @override
@@ -38,7 +37,8 @@ class _BookDetailsState extends State<BookDetails> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 24.0),
-                    child: DisplayText(widget.personalBook.googleBook.description),
+                    child:
+                        DisplayText(widget.personalBook.googleBook.description),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
@@ -151,7 +151,10 @@ class _BookDetailsState extends State<BookDetails> {
                     padding: const EdgeInsets.only(bottom: 32.0),
                     child: Row(
                       children: [
-                        Expanded(child: Text(widget.personalBook.comments,)),
+                        Expanded(
+                            child: Text(
+                          widget.personalBook.comments,
+                        )),
                       ],
                     ),
                   ),
@@ -161,18 +164,18 @@ class _BookDetailsState extends State<BookDetails> {
                       icon: Icons.edit,
                       text: "Editar",
                       onTap: () {
-                         Navigator.push(
-                             context,
-                             MaterialPageRoute(
-                                 builder: (context) => EditDetails(
-                                       personalBook: widget.personalBook,
-                                     ))).then((value) {
-                           setState(() {
-                             if (value != null) {
-                               widget.personalBook = value;
-                             }
-                           });
-                         });
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditDetails(
+                                      personalBook: widget.personalBook,
+                                    ))).then((value) {
+                          setState(() {
+                            if (value != null) {
+                              widget.personalBook = value;
+                            }
+                          });
+                        });
                       },
                     ),
                   ),
@@ -183,11 +186,11 @@ class _BookDetailsState extends State<BookDetails> {
                       text: "Excluir",
                       onTap: () {
                         controller.deleteBook(widget.personalBook);
-                         Navigator.pushAndRemoveUntil(
-                           context,
-                           MaterialPageRoute(builder: (context) => const Home()),
-                           (_) => false,
-                         );
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Home()),
+                          (_) => false,
+                        );
                       },
                     ),
                   ),

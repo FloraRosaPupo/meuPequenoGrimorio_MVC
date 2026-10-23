@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:grimorio_arquitetura_mvc/controller/book_controller.dart';
-import 'package:grimorio_arquitetura_mvc/models/personal_book_model.dart';
-import 'package:grimorio_arquitetura_mvc/views/components/date_input.dart';
+import 'package:grimorio_arquitetura_mvc/features/library/presentation/controllers/book_controller.dart';
+import 'package:grimorio_arquitetura_mvc/features/library/domain/personal_book_model.dart';
+import 'package:grimorio_arquitetura_mvc/shared/widgets/date_input.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
-import 'package:grimorio_arquitetura_mvc/views/components/entry.dart';
+import 'package:grimorio_arquitetura_mvc/shared/widgets/entry.dart';
 
-import 'components/display_text.dart';
-import 'components/primary_button.dart';
+import '../../../shared/widgets/display_text.dart';
+import '../../../shared/widgets/primary_button.dart';
 
 class EditDetails extends StatefulWidget {
-   EditDetails({super.key, required this.personalBook});
+  EditDetails({super.key, required this.personalBook});
 
   PersonalBook personalBook;
 
@@ -29,15 +29,15 @@ class _EditDetailsState extends State<EditDetails> {
   void initState() {
     super.initState();
     // Fill with book info
-    if(widget.personalBook.comments != ""){
-       commentsController.text = widget.personalBook.comments;
-   }
-    if(widget.personalBook.dayStarted != ""){
-    initialDateController.text = widget.personalBook.dayStarted;
+    if (widget.personalBook.comments != "") {
+      commentsController.text = widget.personalBook.comments;
     }
-    if(widget.personalBook.dayFinished != ""){
+    if (widget.personalBook.dayStarted != "") {
+      initialDateController.text = widget.personalBook.dayStarted;
+    }
+    if (widget.personalBook.dayFinished != "") {
       finalDateController.text = widget.personalBook.dayFinished;
-     }
+    }
   }
 
   @override
@@ -47,7 +47,9 @@ class _EditDetailsState extends State<EditDetails> {
         decoration: AppBackgroundProperties.boxDecoration,
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(backgroundColor: AppColors.black,),
+          appBar: AppBar(
+            backgroundColor: AppColors.black,
+          ),
           body: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -66,18 +68,22 @@ class _EditDetailsState extends State<EditDetails> {
                           children: <Widget>[
                             Padding(
                               padding: const EdgeInsets.only(bottom: 16.0),
-                              child: DateInput(textController: initialDateController, label: "Início da Leitura"),
+                              child: DateInput(
+                                  textController: initialDateController,
+                                  label: "Início da Leitura"),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 24.0),
-                              child: DateInput(textController: finalDateController, label: "Final da Leitura"),
+                              child: DateInput(
+                                  textController: finalDateController,
+                                  label: "Final da Leitura"),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 24.0),
                               child: TextFormField(
                                 controller: commentsController,
-                                decoration:
-                                  InputDecorationProperties.newInputDecoration(
+                                decoration: InputDecorationProperties
+                                    .newInputDecoration(
                                   "",
                                   "Comentários",
                                 ),
@@ -86,18 +92,24 @@ class _EditDetailsState extends State<EditDetails> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 40.0),
-                              child: PrimaryButton(text: "Salvar", onTap: () {
-                                //criar um novo PersonalBook
-                                final PersonalBook newPersonal = PersonalBook(
-                                  dayStarted: initialDateController.text,
-                                  dayFinished: finalDateController.text,
-                                  comments: commentsController.text,
-                                  googleBook: widget.personalBook.googleBook, id: widget.personalBook.id
-                                );
-                                controller.updateBook(newPersonal);
+                              child: PrimaryButton(
+                                  text: "Salvar",
+                                  onTap: () {
+                                    //criar um novo PersonalBook
+                                    final PersonalBook newPersonal =
+                                        PersonalBook(
+                                            dayStarted:
+                                                initialDateController.text,
+                                            dayFinished:
+                                                finalDateController.text,
+                                            comments: commentsController.text,
+                                            googleBook:
+                                                widget.personalBook.googleBook,
+                                            id: widget.personalBook.id);
+                                    controller.updateBook(newPersonal);
 
-                                Navigator.pop(context, newPersonal);
-                              }),
+                                    Navigator.pop(context, newPersonal);
+                                  }),
                             ),
                           ],
                         ),
@@ -113,4 +125,3 @@ class _EditDetailsState extends State<EditDetails> {
     );
   }
 }
-

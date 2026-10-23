@@ -3,7 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
 
 class SecondaryButton extends StatelessWidget {
-  const SecondaryButton({super.key, required this.text, this.icon, required this.onTap});
+  const SecondaryButton(
+      {super.key, required this.text, this.icon, required this.onTap});
   final String text;
   final IconData? icon;
   final VoidCallback? onTap;
@@ -24,11 +25,15 @@ class SecondaryButton extends StatelessWidget {
               padding: const EdgeInsets.only(right: 8.0),
               child: SvgPicture.asset(stars),
             ),
-            icon != null ?
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Icon(icon, color: SecondaryButtonProperties.iconColor,),
-            ) : Container(),
+            icon != null
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      icon,
+                      color: SecondaryButtonProperties.iconColor,
+                    ),
+                  )
+                : Container(),
             Text(
               text,
               style: SecondaryButtonProperties.textStyle,
@@ -41,5 +46,5 @@ class SecondaryButton extends StatelessWidget {
         ),
       ),
     );
-  } 
+  }
 }
