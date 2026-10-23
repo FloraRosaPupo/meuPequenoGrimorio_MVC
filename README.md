@@ -1,11 +1,28 @@
 # Meu Pequeno Grimório
 
-Consulta de livros e registro pessoal de leituras.
+## Descrição
 
-## Stack e organização
+Aplicativo Flutter para buscar livros e organizar uma biblioteca pessoal, com consulta HTTP e armazenamento local em SQLite. O código organiza a funcionalidade de biblioteca em modelos, acesso a dados, controllers e telas.
+
+## Stack e bibliotecas
+
 Flutter/Dart, http, SQLite e componentes de interface.
 
-Biblioteca reúne models, serviço, DAO, controller e telas em `features/library`; autenticação fica em `features/auth` e widgets reutilizados em shared. Mantido MVC existente: controller coordena a apresentação, serviço consulta API e DAO persiste dados. Não foi duplicado com MVVM.
+Dependências e versões declaradas: [pubspec.yaml](pubspec.yaml).
+
+## Funcionalidades
+
+- Busca de livros.
+- Biblioteca pessoal.
+- Criação e edição de registros.
+
+## Licença
+
+Não há uma licença de distribuição definida para este repositório. Nenhuma licença MIT, Apache ou equivalente é concedida por este README. As atribuições e os direitos dos materiais de terceiros permanecem preservados.
+
+## Validação e limites
+
+Modelos e serviço HTTP com sucesso, erro e ausência de itens. Persistência e autenticação precisam de testes no ambiente alvo.
 
 ## Executar
 Use a versão de Flutter registrada em `.github/workflows/ci.yml`.
@@ -25,17 +42,6 @@ A CI verifica erros de análise e os testes. Avisos e sugestões continuam visí
 
 ## Contribuir
 Abra uma branch por alteração, descreva o comportamento esperado e inclua testes para regras ou regressões. Mantenha credenciais e arquivos gerados fora do Git.
-
-## Licença
-Não há licença de distribuição definida neste repositório.
-
-
-## Funcionalidades
-
-- Busca de livros.
-- biblioteca pessoal.
-- criação e edição de registros.
-
 
 ## Organização e manutenção
 
