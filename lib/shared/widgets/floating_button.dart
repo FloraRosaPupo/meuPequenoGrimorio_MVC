@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
 
-
 class FloatingButton extends StatelessWidget {
   const FloatingButton({super.key, required this.onTap});
   final VoidCallback? onTap;
@@ -15,7 +14,10 @@ class FloatingButton extends StatelessWidget {
         height: FloatingButtonProperties.size,
         decoration: FloatingButtonProperties.boxDecoration,
         padding: const EdgeInsets.all(10),
-        child: Icon(Icons.add, color: FloatingButtonProperties.iconColor,),
+        child: Icon(
+          Icons.add,
+          color: FloatingButtonProperties.iconColor,
+        ),
       ),
     );
   }

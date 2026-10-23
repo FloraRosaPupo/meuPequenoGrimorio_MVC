@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grimorio_arquitetura_mvc/views/dashboard.dart';
+import 'package:grimorio_arquitetura_mvc/features/library/presentation/dashboard.dart';
 
 void main() {
   runApp(const Grimorio());

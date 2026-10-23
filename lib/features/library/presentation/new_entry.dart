@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:grimorio_arquitetura_mvc/controller/book_controller.dart';
-import 'package:grimorio_arquitetura_mvc/models/google_book_model.dart';
-import 'package:grimorio_arquitetura_mvc/views/components/primary_button.dart';
+import 'package:grimorio_arquitetura_mvc/features/library/presentation/controllers/book_controller.dart';
+import 'package:grimorio_arquitetura_mvc/features/library/domain/google_book_model.dart';
+import 'package:grimorio_arquitetura_mvc/shared/widgets/primary_button.dart';
 import 'package:grimorio_arquitetura_mvc/theme.dart';
-import 'components/date_input.dart';
-import 'components/display_text.dart';
+import '../../../shared/widgets/date_input.dart';
+import '../../../shared/widgets/display_text.dart';
 
 import 'home.dart';
 
 class NewEntry extends StatefulWidget {
-   NewEntry({super.key, required this.googleBook});
+  NewEntry({super.key, required this.googleBook});
 
   GoogleBook googleBook;
 
